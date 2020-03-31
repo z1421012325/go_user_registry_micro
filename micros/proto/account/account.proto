@@ -1,0 +1,86 @@
+syntax="proto3";
+
+package account;
+
+//import "project/micros/proto/account/message.proto";
+
+
+
+service account {
+    rpc registry (RegistryAccountRequest) returns (RegistryAccountResponse) {}
+    rpc verify (VerifyAccountRequest) returns (VerifyAccountResponse) {}
+    rpc login (LoginAccountRequest) returns (LoginAccountResponse) {}
+    rpc logout (LogoutAccounRequest) returns (LogoutAccountResponse) {}
+
+    rpc test (TestAccountRequest) returns (TstAccountResponse) {}
+}
+
+
+
+
+
+message RegistryAccountRequest {
+    string nickname  = 1;               // 昵称
+    string username =2;                 // 注册账号
+    string password =3;                 // 密码
+    string method = 4;                  // 注册方法,手机 or email
+}
+message RegistryAccountResponse {
+    int32 code = 1;                     // 状态码
+    string msg = 2;                     // msg
+}
+
+
+
+message VerifyAccountRequest {
+    string nickname  = 1;               // 昵称
+    string username =2;                 // 注册账号
+    string password =3;                 // 密码
+    string method = 4;                  // 注册方法,手机 or email
+    int32  verifycode =5;               // 验证码
+}
+message VerifyAccountResponse {
+    int32 code = 1;                     // 状态码
+    string msg = 2;                     // msg
+}
+
+
+
+
+message LoginAccountRequest {
+    string username =1;                 // 账号
+    string password =2;                 // 密码
+    string method =3;                   // 登录方法,手机 or email
+}
+
+message LoginAccountResponse {
+    int32 code = 1;                     // 状态码
+    string msg = 2;                     // msg
+    string token =3;                    // 登录凭证token
+}
+
+
+
+
+
+message LogoutAccounRequest {
+    string token =1;                    // 登录token
+}
+message LogoutAccountResponse {
+    int32 code = 1;                     // 状态码
+    string msg = 2;                     // msg
+}
+
+
+
+
+
+
+// 测试token
+message TestAccountRequest {
+    string token =1;                    // 登录token
+}
+message TstAccountResponse {
+    int32 code = 1;                     // 状态码
+    string msg = 2;                     // msg
+}
